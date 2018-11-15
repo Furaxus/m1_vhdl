@@ -19,7 +19,7 @@ end test_registres;
 architecture behavior of test_registres is
 
 -- definition des constantes de test
-	constant S_DATA	: positive:=32; -- taille du bus de donnes
+	constant S_DATA		: positive:=32; -- taille du bus de donnes
 	constant S_ADR		: positive:=3; -- taille du bus d'adresse
 	constant WFRONT 	: std_logic := '1'; -- front actif pour ecriture
 	constant TIMEOUT 	: time := 150 ns; -- timeout de la simulation
@@ -34,7 +34,7 @@ constant clkpulse : Time := 5 ns; -- 1/2 periode horloge
 -- definition de ressources externes
 signal E_CLK							: std_logic;
 signal E_RST,E_W 						: std_logic; -- actifs a l'etat bas
-signal E_ADR_A,E_ADR_B,E_ADR_W	: std_logic_vector(S_ADR-1 downto 0);
+signal E_ADR_A,E_ADR_B,E_ADR_W			: std_logic_vector(S_ADR-1 downto 0);
 signal E_QA,E_QB,E_D					: std_logic_vector(S_DATA-1 downto 0);
 
 begin

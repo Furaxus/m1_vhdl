@@ -37,7 +37,7 @@ entity registres is
 		ADR_A, ADR_B, ADR_W : in std_logic_vector (ABUS_WIDTH downto 0);
 
 		-- Ports de sortie
-		QA, QB : out is array (0 to ABUS_WIDTH-1) of std_logic_vector (DBUS_WIDTH-1 downto 0)
+		QA, QB : out std_logic_vector (DBUS_WIDTH-1 downto 0)
 	);
 
 end registres;
@@ -51,7 +51,7 @@ end registres;
 architecture behavior of registres is
 
 	-- definitions de types (index type default is integer)
-	type FILE_REGS is array (0 to (2**3)-1) of std_logic_vector (31 downto 0);
+	type FILE_REGS is array (0 to (2**ABUS_WIDTH)-1) of std_logic_vector (DBUS_WIDTH downto 0);
 
 	-- definition des ressources internes
 	signal REGS : FILE_REGS; -- le banc de registres
