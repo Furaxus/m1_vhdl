@@ -103,7 +103,7 @@ end log2;
 
 -- fonction "+" --> procedure adder_cla
 function "+" (A,B: in std_logic_vector) return std_logic_vector is
-	variable S : std_logic_vector (A'length downto 0);
+	variable S : std_logic_vector (A'range);
 	variable V : std_logic;
 	variable C_OUT : std_logic;
 begin
@@ -122,14 +122,14 @@ end "+";
 procedure adder_cla (A,B: in std_logic_vector;C_IN : in std_logic;
 							S : out std_logic_vector;C_OUT : out std_logic;
 							V : out std_logic) is
-	variable G_CLA,P_CLA		: std_logic_vector(A'length downto 0);
-	variable C_CLA			: std_logic_vector(A'length+1 downto 0);
+	variable G_CLA,P_CLA		: std_logic_vector(A'length-1 downto 0);
+	variable C_CLA			: std_logic_vector(A'length downto 0);
 begin
 	-- calcul de P et G
 	G_CLA := A and B;
 	P_CLA := A or B;
 	C_CLA(0) := C_IN;
-	for i in A'reverse_range loop
+	for i in 0 to A'HIGH loop
 		C_CLA(i+1) := G_CLA(i) or (P_CLA(i) and C_CLA(i));
 	end loop;
 	S := A xor B xor C_CLA(A'range);
@@ -141,7 +141,15 @@ end adder_cla;
 --procedure alu (A,B: in std_logic_vector;signal S: out std_logic_vector;
 --					signal N,V,Z,C: out std_logic;SIGNED_OP: in std_logic;
 --					CTRL_ALU: in ALU_OPS) is
+--	variable tmpN, tmpC, tmpV : std_logic;
 --begin
+--	tmpN := '0';
+--	tmpV := '0';
+--	tmpC := '0';
+--	case (CTRL_ALU) is
+--	when ALU_ADD | ALU_SUB | ALU_SUB =>
+--		
+--	when 
 --end alu;
 
 end cpu_package;

@@ -94,7 +94,7 @@ begin
 	if (E_ADD_SUB = '1') then
 		I_B := not(E_B);
 	end if;
-	adder_cla(E_A, I_B, E_ADD_SUB, tmpS, tmpV, tmpC);
+	adder_cla(E_A, I_B, E_ADD_SUB, tmpS, tmpC, tmpV);
 	E_S <= tmpS;
 	E_V <= tmpV;
 	E_COUT <= tmpC;
