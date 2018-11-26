@@ -1,0 +1,58 @@
+/home/jeremy/Documents/m1vhdl/cpu_package.1.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/cpu_package.1.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling package cpu_package
+-- Compiling package body cpu_package
+-- Loading package cpu_package
+
+} {} {}} /home/jeremy/Documents/m1vhdl/test_memory.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_memory.0.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package cpu_package
+-- Compiling entity test_memory
+-- Compiling architecture behavior of test_memory
+-- Loading package std_logic_textio
+-- Loading entity memory
+
+} {} {}} /home/jeremy/Documents/m1vhdl/registres.1.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/registres.1.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity registres
+-- Compiling architecture behavior of registres
+
+} {} {}} /home/jeremy/Documents/m1vhdl/memory.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/memory.0.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package std_logic_textio
+-- Loading package cpu_package
+-- Compiling entity memory
+-- Compiling architecture behavior of memory
+
+} {} {}} /home/jeremy/Documents/m1vhdl/cpu_package.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/cpu_package.0.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling package cpu_package
+-- Compiling package body cpu_package
+-- Loading package cpu_package
+
+} {} {}}

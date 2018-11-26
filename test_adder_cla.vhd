@@ -86,16 +86,18 @@ end process P_TIMEOUT;
 -- process additionneur
 --		car un appel de procedure est une instruction (process only)
 P_ADDER: process(E_A,E_B,E_ADD_SUB)
-	variable ________;
-	variable ________;
-	variable ________;
-	variable ________;
+	variable I_B : std_logic_vector(E_B'range);
+	variable tmpC, tmpV : std_logic;
+	variable tmpS : std_logic_vector(E_S'range);
 begin
-	________
-	________
-	________
-	________
-	________
+	I_B := E_B;
+	if (E_ADD_SUB = '1') then
+		I_B := not(E_B);
+	end if;
+	adder_cla(E_A, I_B, E_ADD_SUB, tmpS, tmpV, tmpC);
+	E_S <= tmpS;
+	E_V <= tmpV;
+	E_COUT <= tmpC;
 end process P_ADDER;
 
 -----------------------------

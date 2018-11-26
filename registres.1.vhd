@@ -68,9 +68,8 @@ begin
 
 ---------------------------------
 -- test si acces simultanes
-D2QA <= ________
-D2QB <= ________
-
+D2QA <= not(is_x(ADR_A) or is_x(ADR_W)) and (ADR_A=ADR_W) and (W='0');
+D2QB <= not(is_x(ADR_B) or is_x(ADR_W)) and (ADR_B=ADR_W) and (W='0');
 -------------------
 -- Process P_ReadQA
 P_ReadQA: process(ADR_A,D2QA,D)
@@ -117,19 +116,18 @@ end process P_ReadQB;
 
 ------------------
 -- Process P_WRITE
-P_WRITE: process(___)
+P_WRITE: process(CLK)
 begin
 	-- test du front actif d'horloge
-	________
-		-- test du reset
-		if RST='0' then
-			REGS <= (others => conv_std_logic_vector(0,DBUS_WIDTH));
-		else
-			-- test si ecriture dans le registre
-			________
-			________
+        if rising_edge(CLK) then
+                -- test du reset
+                if RST='0' then
+                        REGS <= (others => conv_std_logic_vector(0,DBUS_WIDTH));
+                -- test si ecriture dans le registre
+                elsif ((W='0') and ADR_W /= conv_std_logic_vector(0, ADR_W'length)) then
+                        REGS(conv_integer(ADR_W)) <= D;
 		end if;
-
+        end if;
 end process P_WRITE;
 
 end behavior;

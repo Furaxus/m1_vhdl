@@ -33,7 +33,7 @@ architecture behavior of test_memory is
 	constant S_ADR		: positive := log2(S_L1); -- taille du bus adr du cache
 	constant WFRONT 	: std_logic := L1_FRONT; -- front actif pour ecriture
 --	constant FILENAME : string := ""; -- init a 0 par defaut
-	constant FILENAME : string := "rom_file.0.txt"; -- init par fichier
+	constant FILENAME : string := "./rom.0.txt"; -- init par fichier
 	constant TIMEOUT 	: time := 100 ns; -- timeout de la simulation
 
 -- definition de constantes

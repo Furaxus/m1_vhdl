@@ -103,11 +103,12 @@ end log2;
 
 -- fonction "+" --> procedure adder_cla
 function "+" (A,B: in std_logic_vector) return std_logic_vector is
-	variable ______;
-	variable ______;
+	variable S : std_logic_vector (A'length downto 0);
+	variable V : std_logic;
+	variable C_OUT : std_logic;
 begin
-	________
-	________
+	adder_cla(A, B, '0', S, C_OUT, V);
+	return (S);
 end "+";
 
 -- Le drapeau overflow V ne sert que lors d'operations signees !!!
@@ -121,16 +122,19 @@ end "+";
 procedure adder_cla (A,B: in std_logic_vector;C_IN : in std_logic;
 							S : out std_logic_vector;C_OUT : out std_logic;
 							V : out std_logic) is
-	variable G_CLA,P_CLA	: std_logic_vector(______ downto 0);
-	variable C_CLA			: std_logic_vector(_______ downto 0);
+	variable G_CLA,P_CLA		: std_logic_vector(A'length downto 0);
+	variable C_CLA			: std_logic_vector(A'length+1 downto 0);
 begin
 	-- calcul de P et G
-	________
-	________
-	________
-	________
-	________
-	________
+	G_CLA := A and B;
+	P_CLA := A or B;
+	C_CLA(0) := C_IN;
+	for i in A'reverse_range loop
+		C_CLA(i+1) := G_CLA(i) or (P_CLA(i) and C_CLA(i));
+	end loop;
+	S := A xor B xor C_CLA(A'range);
+	C_OUT := C_CLA(C_CLA'high);
+	V := C_CLA(C_CLA'high) xor C_CLA(C_CLA'length - 2);
 end adder_cla;
 
 -- procedure alu

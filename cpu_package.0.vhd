@@ -71,14 +71,14 @@ package body cpu_package is
 
 -- fonction log2
 function log2 (I: in natural) return natural is
-	variable ______ := <val>
-	variable ______ := <val>
+	variable nb_bits : natural range 0 to 7 := 0;
+	variable current_val: natural range 0 to 256 := 1;
 begin
-	________
-	________
-	________
-	________
-	return ______;
+	while (current_val < I) loop
+		current_val := current_val * 2;
+		nb_bits := nb_bits + 1;
+	end loop;
+	return nb_bits;
 end log2;
 
 end cpu_package;
