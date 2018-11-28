@@ -73,9 +73,9 @@ package cpu_package is
 
 	-- On notera l'utilisation d'un signal comme parametres formels de type OUT
 	-- procedure alu
---	procedure alu (A,B: in std_logic_vector; signal S: out std_logic_vector;
---						signal N,V,Z,C: out std_logic; SIGNED_OP: in std_logic;
---						CTRL_ALU: in ALU_OPS);
+	procedure alu (A,B: in std_logic_vector; signal S: out std_logic_vector;
+						signal N,V,Z,C: out std_logic; SIGNED_OP: in std_logic;
+						CTRL_ALU: in ALU_OPS);
 
 end cpu_package;
 
@@ -138,18 +138,43 @@ begin
 end adder_cla;
 
 -- procedure alu
---procedure alu (A,B: in std_logic_vector;signal S: out std_logic_vector;
---					signal N,V,Z,C: out std_logic;SIGNED_OP: in std_logic;
---					CTRL_ALU: in ALU_OPS) is
---	variable tmpN, tmpC, tmpV : std_logic;
---begin
---	tmpN := '0';
---	tmpV := '0';
---	tmpC := '0';
---	case (CTRL_ALU) is
---	when ALU_ADD | ALU_SUB | ALU_SUB =>
---		
---	when 
---end alu;
+procedure alu (A,B: in std_logic_vector;signal S: out std_logic_vector;
+					signal N,V,Z,C: out std_logic;SIGNED_OP: in std_logic;
+					CTRL_ALU: in ALU_OPS) is
+	variable tmpN, tmpC, tmpV : std_logic;
+	variable tmpS : std_logic_vector(S'range);
+begin
+	tmpN := '0';
+	tmpV := '0';
+	tmpC := '0';
+	case (CTRL_ALU) is
+		when ALU_ADD | ALU_SUB =>
+			adder_cla(A, B, '0', tmpS, tmpC, tmpV);
+			tmpC := not SIGNED_OP and tmpC;
+			tmpV := SIGNED_OP and tmpV;
+			tmpN := SIGNED_OP and tmpS(tmpS'high);
+		when ALU_LSL =>
+			tmpS := shl(A,B);
+		when ALU_LSR =>
+			tmpS := shr(A,B);
+		when ALU_XOR =>
+			tmpS := A xor B;
+		when ALU_NOR =>
+			tmpS := A nor B;
+		when ALU_OR =>
+			tmpS := A or B;
+		when ALU_AND =>
+			tmpS := A and B;
+		when others =>
+			tmpS := (others => 'X');
+	end case;
+
+	N <= tmpN;
+	Z <= '1' when (tmpS = conv_std_logic_vector(0,S'length)) else '0';
+	V <= tmpV;
+	C <= tmpC;
+
+	S <= tmpS;
+end alu;
 
 end cpu_package;
