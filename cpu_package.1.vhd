@@ -166,11 +166,15 @@ begin
 		when ALU_AND =>
 			tmpS := A and B;
 		when others =>
-			tmpS := (others => 'X');
+			tmpS := (others => '0');
 	end case;
 
 	N <= tmpN;
-	Z <= '1' when (tmpS = conv_std_logic_vector(0,S'length)) else '0';
+	if (tmpS = conv_std_logic_vector(0,S'length)) then
+		Z <= '1';
+	else
+		Z <= '0';
+	end if;
 	V <= tmpV;
 	C <= tmpC;
 

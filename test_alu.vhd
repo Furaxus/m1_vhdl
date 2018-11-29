@@ -97,8 +97,8 @@ begin
 	-- addition non signee, on ne change que signed_op par rapport a la precedente operation
 	wait until (E_CLK=not(WFRONT));
 	ALU_SIGNED <= '0';
-	wait on ALU_S; -- ###ERROR### ne marche pas car la sortie ALU_S n'evolue pas !!!
---	wait on ALU_N;
+--	wait on ALU_S; -- ###ERROR### ne marche pas car la sortie ALU_S n'evolue pas !!!
+	wait on ALU_N;
 	assert (ALU_S=conv_std_logic_vector(-6,S_ALU) and (ALU_N,ALU_V,ALU_C)=to_stdlogicvector(BIT_VECTOR'(B"000")))
 		report "Addition failed, doit etre ALU_S=10 et NVC=000"
 		severity ERROR;
@@ -110,29 +110,30 @@ begin
 	ALU_SIGNED <= '1';
 	ALU_A <= conv_std_logic_vector(2,S_ALU);
 	ALU_B <= conv_std_logic_vector(8,S_ALU);
-	wait on ALU_N;
+--	wait on ALU_N
+	wait on ALU_S;
 	assert (ALU_S=conv_std_logic_vector(-6,S_ALU) and ALU_V='0')
 		report "Soustraction failed, doit etre ALU_S=-6 et ALU_V=0"
 		severity ERROR;
 
 	-- Positionner si < signe
-	wait until (E_CLK=not(WFRONT));
-	ALU_CTRL <= ALU_SLT;
-	ALU_SIGNED <= '1';
-	ALU_A <= conv_std_logic_vector(-8,S_ALU);
-	ALU_B <= conv_std_logic_vector(7,S_ALU);
-	wait on ALU_S;
-	assert (ALU_S=conv_std_logic_vector(1,S_ALU))
-		report "SLT failed, doit etre ALU_S=1"
-		severity ERROR;
+--	wait until (E_CLK=not(WFRONT));
+--	ALU_CTRL <= ALU_SLT;
+--	ALU_SIGNED <= '1';
+--	ALU_A <= conv_std_logic_vector(-8,S_ALU);
+--	ALU_B <= conv_std_logic_vector(7,S_ALU);
+--	wait on ALU_S;
+--	assert (ALU_S=conv_std_logic_vector(1,S_ALU))
+--		report "SLT failed, doit etre ALU_S=1"
+--		severity ERROR;
 
 	-- Positionner si < non signe, on ne change que signed_op par rapport a la precedente operation
-	wait until (E_CLK=not(WFRONT));
-	ALU_SIGNED <= '0';
-	wait on ALU_S;
-	assert (ALU_S=conv_std_logic_vector(0,S_ALU))
-		report "SLT failed, doit etre ALU_S=0"
-		severity ERROR;
+--	wait until (E_CLK=not(WFRONT));
+--	ALU_SIGNED <= '0';
+--	wait on ALU_S;
+--	assert (ALU_S=conv_std_logic_vector(0,S_ALU))
+--		report "SLT failed, doit etre ALU_S=0"
+--		severity ERROR;
 
 	-- decalage gauche
 	wait until (E_CLK=not(WFRONT));

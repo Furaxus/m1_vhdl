@@ -71,10 +71,10 @@ begin
 	if rising_edge(CLK) then
 		-- test du RST
 		if RST='0' then
-			________
-			________
-			________
-			________
+			W_ADR <= (others => '0');
+		elsif WEN = '0' then
+			REGS(conv_integer(W_ADR)) <= D;
+			W_ADR <= W_ADR + '1';
 		end if;
 	end if;
 end process P_WRITE;
@@ -88,18 +88,16 @@ begin
 	if rising_edge(CLK) then
 		-- test du RST
 		if RST='0' then
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
+			R_ADR <= (others => '0');
+		elsif REN = '0' then
+			if EMPTY = '1' THEN
+				Q <= (others => '0');
+			else
+				Q <= REGS(conv_integer(R_ADR));
+				R_ADR <= R_ADR + '1';
+			end if;
+		else
+			Q <= (others => 'Z');
 		end if;
 	end if;
 end process P_READ;
@@ -113,14 +111,13 @@ begin
 	if rising_edge(CLK) then
 		-- test du RST
 		if RST='0' then
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
+			EMPTY <= '1';
+		elsif WEN = '0' then
+			EMPTY <= '0';
+		elsif REN = '0' then
+			if R_ADR+'1' = W_ADR then
+				EMPTY <= '1';
+			end if;
 		end if;
 	end if;
 end process P_EMPTY;
@@ -134,14 +131,9 @@ begin
 	if rising_edge(CLK) then
 		-- test du RST
 		if RST='0' then
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
+			FULL <= '0';
+		elsif (EMPTY = '0' and R_ADR = W_ADR) then
+			FULL <= '1';
 		end if;
 	end if;
 end process P_FULL;
@@ -156,18 +148,7 @@ begin
 	if rising_edge(CLK) then
 		-- test du RST
 		if RST='0' then
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
-			________
+			
 		end if;
 	end if;
 end process P_MID;
