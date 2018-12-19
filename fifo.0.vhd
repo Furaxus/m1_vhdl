@@ -134,6 +134,8 @@ begin
 			FULL <= '0';
 		elsif (EMPTY = '0' and R_ADR = W_ADR) then
 			FULL <= '1';
+		else
+			FULL <= '0';
 		end if;
 	end if;
 end process P_FULL;
@@ -148,7 +150,18 @@ begin
 	if rising_edge(CLK) then
 		-- test du RST
 		if RST='0' then
-			
+			MID <= '0';
+		else
+			if (WEN = '0') then
+				temp_W := W_ADR + 1;
+			end if;
+			if ( not(R_ADR(R_ADR'HIGH))=(temp_W(W_ADR'HIGH)) and (temp_W(W_ADR'HIGH-1 downto 0) = (R_ADR(R_ADR'HIGH-1 downto 0)) )) then
+				if (REN = '0') then
+					MID <= '0';
+				elsif (WEN = '0') then
+					MID <= '1';
+				end if;
+			end if;
 		end if;
 	end if;
 end process P_MID;

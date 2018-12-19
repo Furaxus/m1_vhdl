@@ -29,7 +29,7 @@ architecture behavior of test_ssram is
 	constant S_DATA	: positive := 8; -- taille du bus de donnes
 	constant D_CS		: positive := 4; -- latence en nombre de cycles
 	constant D_I2Q		: time := 2 ns; -- delai entre une nouvelle adresse et l'evolution de la sortie
---	constant RWFRONT 	: std_logic := '0'; -- front actif pour lecture/ecriture
+	constant RWFRONT 	: std_logic := '0'; -- front actif pour lecture/ecriture
 	constant TIMEOUT 	: time := 500 ns; -- timeout de la simulation
 
 -- definition de constantes
@@ -129,8 +129,8 @@ begin
 			severity ERROR;
 	wait until (E_CLK='1'); -- front montant horloge
 	wait for clkpulse/4; -- on attend 1/8 de periode d'horloge
---		assert (E_DBUS = conv_std_logic_vector('Z',S_DATA))
-		assert (E_DBUS = ('Z','Z','Z','Z','Z','Z','Z','Z'))
+		assert (E_DBUS = conv_std_logic_vector('Z',S_DATA))
+--		assert (E_DBUS = ('Z','Z','Z','Z','Z','Z','Z','Z'))
 			report "E_DBUS wrong value, must be 'Z'"
 			severity ERROR;
 	wait for clkpulse/4; -- on attend 1/8 de periode d'horloge

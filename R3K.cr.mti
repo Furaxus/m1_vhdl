@@ -1,34 +1,12 @@
-/home/jeremy/Documents/m1vhdl/fifo.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/fifo.0.vhd
+/home/jeremy/Documents/m1vhdl/tp9_ssram.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/tp9_ssram.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity fifo
--- Compiling architecture behavior of fifo
-
-} {} {}} /home/jeremy/Documents/m1vhdl/cpu_package.1.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/cpu_package.1.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling package cpu_package
--- Compiling package body cpu_package
--- Loading package cpu_package
-
-} {} {}} /home/jeremy/Documents/m1vhdl/test_adder_cla.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_adder_cla.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package cpu_package
--- Compiling entity test_adder_cla
--- Compiling architecture behavior of test_adder_cla
+-- Compiling entity ssram
+-- Compiling architecture behavior of ssram
 
 } {} {}} /home/jeremy/Documents/m1vhdl/test_memory.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_memory.0.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
@@ -43,15 +21,59 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 2
 -- Loading package std_logic_textio
 -- Loading entity memory
 
-} {} {}} /home/jeremy/Documents/m1vhdl/registres.1.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/registres.1.vhd
+} {} {}} /home/jeremy/Documents/m1vhdl/test_adder_cla.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_adder_cla.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity registres
--- Compiling architecture behavior of registres
+-- Loading package cpu_package
+-- Compiling entity test_adder_cla
+-- Compiling architecture behavior of test_adder_cla
+
+} {} {}} /home/jeremy/Documents/m1vhdl/cpu_package.1.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/cpu_package.1.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling package cpu_package
+-- Compiling package body cpu_package
+-- Loading package cpu_package
+
+} {} {}} /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd {0 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity test_ssram
+-- Compiling architecture behavior of test_ssram
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(73): near "_": syntax error
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(84): Illegal sequential statement.
+** Error: (vcom-11) Could not find work.ssram.
+** Error (suppressible): /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(101): (vcom-1195) Cannot find expanded name "work.ssram".
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(103): near "_": syntax error
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(104): Statement cannot be labeled.
+** Error: (vcom-11) Could not find work.ssram.
+** Error (suppressible): /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(104): (vcom-1195) Cannot find expanded name "work.ssram".
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(106): near "_": syntax error
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(110): Statement cannot be labeled.
+** Error: /home/jeremy/Documents/m1vhdl/test_ssram.0.1.vhd(183): near "behavior": (vcom-1576) expecting PROCESS.
+
+} {10.0 13.0 14.0 17.0 18.0 21.0} {}} /home/jeremy/Documents/m1vhdl/test_ssram.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_ssram.0.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Compiling entity test_ssram
+-- Compiling architecture behavior of test_ssram
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading entity ssram
 
 } {} {}} /home/jeremy/Documents/m1vhdl/memory.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/memory.0.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
@@ -65,16 +87,26 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 2
 -- Compiling entity memory
 -- Compiling architecture behavior of memory
 
-} {} {}} /home/jeremy/Documents/m1vhdl/test_alu.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_alu.vhd
+} {} {}} /home/jeremy/Documents/m1vhdl/registres.1.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/registres.1.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_arith
 -- Loading package STD_LOGIC_UNSIGNED
--- Loading package cpu_package
--- Compiling entity test_alu
--- Compiling architecture behavior of test_alu
+-- Compiling entity registres
+-- Compiling architecture behavior of registres
+
+} {} {}} /home/jeremy/Documents/m1vhdl/test_fifo.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_fifo.0.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Compiling entity test_fifo
+-- Compiling architecture behavior of test_fifo
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading entity fifo
 
 } {} {}} /home/jeremy/Documents/m1vhdl/cpu_package.0.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/cpu_package.0.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
@@ -86,5 +118,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 2
 -- Compiling package cpu_package
 -- Compiling package body cpu_package
 -- Loading package cpu_package
+
+} {} {}} /home/jeremy/Documents/m1vhdl/test_alu.vhd {1 {vcom -work work -2002 -explicit -stats=none /home/jeremy/Documents/m1vhdl/test_alu.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package cpu_package
+-- Compiling entity test_alu
+-- Compiling architecture behavior of test_alu
 
 } {} {}}

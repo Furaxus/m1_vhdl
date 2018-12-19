@@ -43,13 +43,13 @@ entity ssram is
 
 	port (
 		-- signaux de controle
-		RW			: in std_logic; -- R/W* (W actif a l'etat bas)
-		CS,RST	: in std_logic; -- actifs a l'etat bas
+		RW		: in std_logic; -- R/W* (W actif a l'etat bas)
+		CS,RST		: in std_logic; -- actifs a l'etat bas
 		CLK		: in std_logic;
 
 		-- bus d'adresse et de donnee
-		ABUS : in std_logic_vector(ABUS_WIDTH-1 downto 0);
-		DBUS : inout std_logic_vector(DBUS_WIDTH-1 downto 0) );
+		ABUS 		: in std_logic_vector(ABUS_WIDTH-1 downto 0);
+		DBUS 		: inout std_logic_vector(DBUS_WIDTH-1 downto 0) );
 
 end ssram;
 
@@ -61,47 +61,114 @@ architecture behavior of ssram is
 	-- definition de constantes
 
 	-- definitions de types (index type default is integer)
-	type FILE_REG_typ is array (0 to ______) of std_logic_vector (DBUS_WIDTH-1 downto 0);
+	type FILE_REG_typ is array (0 to 2**ABUS_WIDTH-1) of std_logic_vector (DBUS_WIDTH-1 downto 0);
 
 	-- definition des ressources internes
 	signal REGS : FILE_REG_typ; -- le banc de registres
-	______
-	______
 
 begin
 
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
-	______
+
+
+P_SSRAM : process
+	variable overflow : boolean := false;
+	variable index : integer range 0 to 2**ABUS_WIDTH-1;
+	variable cpt_latency : integer range 0 to CS_LATENCY := 0;
+begin
+	wait on CLK;
+	if (rising_edge(CLK)) then
+		if (RST = '0') then
+			--mettre la memoire a 0
+			for i in 0 to 2**ABUS_WIDTH -1 loop
+				REGS(i) <= (others => '0');
+			end loop;
+		else
+			if (CS = '0') then -- cycle en cours
+				if (cpt_latency = 0) then
+					for i in ABUS'range loop
+						report natural'image(ABUS_WIDTH) & " ABUS : " & std_logic'image(ABUS(i));
+					end loop;
+					index := conv_integer(ABUS);
+					report "index : " & integer'image(index);
+				end if;
+				if (cpt_latency < CS_LATENCY) then -- generation latence
+					cpt_latency := cpt_latency + 1;
+				else -- debut traitement
+					if (RW = '0') then -- ecriture
+						if (not overflow) then
+							REGS(index) <= DBUS;
+						end if;
+					else -- lecture
+						wait for I2Q;
+						if (not overflow) then
+							DBUS <= REGS(index);
+						else
+							DBUS <= (others => 'Z');
+						end if;
+					end if;
+					if (index = 2**ABUS_WIDTH-1) then
+						overflow := true;
+					else
+						index := index + 1;
+					end if;
+				end if;
+				
+			else -- pas de cycle en cours
+				DBUS <= (others => 'Z');
+				cpt_latency := 0;
+				overflow := false;
+			end if;
+		end if;
+	end if;
+
+end process P_SSRAM;
+
+--P_SSRAM : process (CLK)
+--	variable overflow : boolean := false;
+--	variable index : integer range 0 to 2**ABUS_WIDTH-1;
+--	variable cpt_latency : integer range 0 to CS_LATENCY := 0;
+--begin
+--	if (rising_edge(CLK)) then
+--		if (RST = '0') then
+--			--mettre la memoire a 0
+--			for i in 0 to 2**ABUS_WIDTH -1 loop
+--				REGS(i) <= (others => '0');
+--			end loop;
+--		else
+--			if (CS = '0') then -- cycle en cours
+--				if (cpt_latency = 0) then
+--					index := conv_integer(ABUS);
+--				end if;
+--				if (cpt_latency < CS_LATENCY) then -- generation latence
+--					cpt_latency := cpt_latency + 1;
+--				else -- debut traitement
+--					if (RW = '0') then -- ecriture
+--						if (not overflow) then
+--							REGS(index) <= DBUS;
+--						end if;
+--					else -- lecture
+--						if (not overflow) then
+--							DBUS <= REGS(index);
+--						else
+--							DBUS <= (others => 'Z');
+--						end if;
+--					end if;
+--					if (index = 2**ABUS_WIDTH-1) then
+--						overflow := true;
+--					else
+--						index := index + 1;
+--					end if;
+--				end if;
+--				
+--			else -- pas de cycle en cours
+--				DBUS <= (others => 'Z');
+--				cpt_latency := 0;
+--				overflow := false;
+--			end if;
+--		end if;
+--	end if;
+--
+--end process P_SSRAM;
 
 
 end behavior;

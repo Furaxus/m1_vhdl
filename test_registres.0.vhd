@@ -60,7 +60,7 @@ end process P_TIMEOUT;
 --------------------------------------------------
 -- instantiation et mapping du composant registres
 regf0 : entity work.registres(behavior)
---					generic map (S_DATA,S_ADR,WFRONT)
+					generic map (S_DATA,S_ADR,WFRONT)
 					port map (CLK => E_CLK,
 								 W => E_W,
 								 RST => E_RST,

@@ -66,7 +66,7 @@ end process P_TIMEOUT;
 -- instanciation et mapping du composant fifo
 fifo1 : entity work.fifo(behavior)
 			-- Utilisez les constantes W_DATA & W_ADR !
-			________
+			generic map (W_DATA,W_ADR)
 			port map (E_CLK,E_RST,E_REN,E_WEN,E_D,E_Q,E_EMPTY,E_MID,E_FULL);
 
 ------------------------------------------------------------------

@@ -38,7 +38,7 @@ architecture behavior of test_ssram is
 constant S_CPU_ADR		: positive := 16; -- taille du bus d'adresse CPU (A15 --> A1)
 constant S_CPU_DATA		: positive := 16; -- taille du bus de donnes SSRAM
 constant S_SSRAM_ADR		: positive := 3; -- taille du bus d'adresse SSRAM
-constant S_SSRAM_DATA	: positive := 8; -- taille du bus de donnes SSRAM
+constant S_SSRAM_DATA		: positive := 8; -- taille du bus de donnes SSRAM
 constant D_SSRAM_CS		: positive := 4; -- latence en nombre de cycles SSRAM
 constant D_SSRAM_I2Q		: time := 2 ns; -- delai entre une nouvelle adresse et l'evolution de la sortie
 --	constant RWFRONT 	: std_logic := '0'; -- front actif pour lecture/ecriture
@@ -55,11 +55,11 @@ constant clkpulse 		: Time := 5 ns; -- 1/2 periode horloge
 constant SSRAM_BADR		: std_logic_vector := conv_std_logic_vector(16#100#,S_CPU_ADR); -- adresse de base des ssrams
 
 -- definition de ressources externes
-signal E_CLK		: std_logic;
-signal E_RST,E_CS	: std_logic; -- actifs a l'etat bas
+signal E_CLK			: std_logic;
+signal E_RST,E_CS		: std_logic; -- actifs a l'etat bas
 signal E_RW			: std_logic; -- W* actif a l'etat bas
-signal E_DBUS		: std_logic_vector(S_CPU_DATA-1 downto 0);
-signal E_ABUS		: std_logic_vector(S_CPU_ADR-1 downto 0);
+signal E_DBUS			: std_logic_vector(S_CPU_DATA-1 downto 0);
+signal E_ABUS			: std_logic_vector(S_CPU_ADR-1 downto 0);
 
 -- definition de ressources internes
 signal I_CS			: std_logic; -- CS pour les SSRAM
@@ -162,8 +162,8 @@ begin
 	wait for clkpulse*2*(D_SSRAM_CS-2);
 	wait until (E_CLK='1'); -- front montant
 	wait for clkpulse/4; -- on attend 1/8 de periode d'horloge
---		assert (E_DBUS = conv_std_logic_vector('Z',S_DATA))
-		assert (E_DBUS = ('Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z'))
+		assert (E_DBUS = conv_std_logic_vector('Z',S_DATA))
+--		assert (E_DBUS = ('Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z'))
 			report "E_DBUS wrong value, must be 'Z'"
 			severity ERROR;
 	wait for clkpulse/4; -- on attend 1/8 de periode d'horloge
