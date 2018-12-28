@@ -41,8 +41,8 @@ constant S_SSRAM_ADR		: positive := 3; -- taille du bus d'adresse SSRAM
 constant S_SSRAM_DATA		: positive := 8; -- taille du bus de donnes SSRAM
 constant D_SSRAM_CS		: positive := 4; -- latence en nombre de cycles SSRAM
 constant D_SSRAM_I2Q		: time := 2 ns; -- delai entre une nouvelle adresse et l'evolution de la sortie
---	constant RWFRONT 	: std_logic := '0'; -- front actif pour lecture/ecriture
-constant TIMEOUT 			: time := 500 ns; -- timeout de la simulation
+constant RWFRONT 		: std_logic := '0'; -- front actif pour lecture/ecriture
+constant TIMEOUT 		: time := 500 ns; -- timeout de la simulation
 
 -- definition de types
 subtype T_UDATA is std_logic_vector(S_CPU_DATA-1 downto S_CPU_DATA/2); -- upper data bus part
@@ -70,12 +70,11 @@ begin
 -- affectations du chip select interne
 P_I_CS: process(E_RST,E_CS)
 begin
-	______
-	______
-	______
-	______
-	______
-
+	if (E_RST = '0') then
+		I_CS <= '1';
+	else
+		I_CS <= E_CS;	-- on ne sait pas comment on doit calculer I_CS avec les 10 bits restant de E_ABUS
+	end if;
 end process P_I_CS;
 
 ------------------------------------------------------------------
@@ -100,10 +99,14 @@ end process P_TIMEOUT;
 -- instanciation et mapping du composant ssram
 ssramU : entity work.ssram(behavior)
 			generic map (S_SSRAM_ADR,S_SSRAM_DATA,D_SSRAM_CS,D_SSRAM_I2Q)
-			port map (__________________________________________);
+			port map (E_RW,I_CS,E_RST,E_CLK,
+				E_ABUS(E_ABUS'left downto E_ABUS'left-S_SSRAM_ADR+1),
+				E_DBUS(E_DBUS'left downto E_DBUS'left-S_SSRAM_DATA+1));
 ssramL : entity work.ssram(behavior)
 			generic map (S_SSRAM_ADR,S_SSRAM_DATA,D_SSRAM_CS,D_SSRAM_I2Q)
-			port map (__________________________________________);
+			port map (E_RW,I_CS,E_RST,E_CLK,
+				E_ABUS(E_ABUS'left-S_SSRAM_ADR downto E_ABUS'left-2*S_SSRAM_ADR+1),
+				E_DBUS(E_DBUS'left-S_SSRAM_DATA downto E_DBUS'left-2*S_SSRAM_DATA+1));
 
 ------------------------------------------------------------------
 -- debut sequence de test
@@ -162,7 +165,7 @@ begin
 	wait for clkpulse*2*(D_SSRAM_CS-2);
 	wait until (E_CLK='1'); -- front montant
 	wait for clkpulse/4; -- on attend 1/8 de periode d'horloge
-		assert (E_DBUS = conv_std_logic_vector('Z',S_DATA))
+		assert (E_DBUS = conv_std_logic_vector('Z',S_CPU_DATA))
 --		assert (E_DBUS = ('Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z','Z'))
 			report "E_DBUS wrong value, must be 'Z'"
 			severity ERROR;

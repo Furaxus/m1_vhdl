@@ -26,7 +26,7 @@ architecture behavior of test_ssram is
 
 -- definition des constantes
 	constant S_ADR		: positive := 3; -- taille du bus d'adresse
-	constant S_DATA	: positive := 8; -- taille du bus de donnes
+	constant S_DATA		: positive := 8; -- taille du bus de donnes
 	constant D_CS		: positive := 4; -- latence en nombre de cycles
 	constant D_I2Q		: time := 2 ns; -- delai entre une nouvelle adresse et l'evolution de la sortie
 	constant RWFRONT 	: std_logic := '0'; -- front actif pour lecture/ecriture
@@ -40,7 +40,7 @@ constant clkpulse : Time := 5 ns; -- 1/2 periode horloge
 -- definition de ressources externes
 signal E_CLK		: std_logic;
 signal E_RST,E_CS	: std_logic; -- actifs a l'etat bas
-signal E_RW			: std_logic; -- W* actif a l'etat bas
+signal E_RW		: std_logic; -- W* actif a l'etat bas
 signal E_DBUS		: std_logic_vector(S_DATA-1 downto 0);
 signal E_ABUS		: std_logic_vector(S_ADR-1 downto 0);
 

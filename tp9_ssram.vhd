@@ -85,24 +85,24 @@ begin
 		else
 			if (CS = '0') then -- cycle en cours
 				if (cpt_latency = 0) then
-					for i in ABUS'range loop
-						report natural'image(ABUS_WIDTH) & " ABUS : " & std_logic'image(ABUS(i));
-					end loop;
 					index := conv_integer(ABUS);
-					report "index : " & integer'image(index);
 				end if;
 				if (cpt_latency < CS_LATENCY) then -- generation latence
+					--report "latency : " & integer'image(cpt_latency);
 					cpt_latency := cpt_latency + 1;
 				else -- debut traitement
 					if (RW = '0') then -- ecriture
 						if (not overflow) then
+							--report "ecriture...";
 							REGS(index) <= DBUS;
 						end if;
 					else -- lecture
 						wait for I2Q;
 						if (not overflow) then
+							--report "lecture...";
 							DBUS <= REGS(index);
 						else
+							--report "overflow...";
 							DBUS <= (others => 'Z');
 						end if;
 					end if;
@@ -117,6 +117,7 @@ begin
 				DBUS <= (others => 'Z');
 				cpt_latency := 0;
 				overflow := false;
+				--report "reset...";
 			end if;
 		end if;
 	end if;
